@@ -1,0 +1,13 @@
+{
+    "sw": 400,
+    "sh": 400,
+    "sinitBodyNum": 3,
+    "slen": 25,
+    "sposx": 200,
+    "sposy": 100,
+    "gamew": 400,
+    "gameh": 355,
+    "bg": "black",
+    "Max_Score": 380,
+    "speed": 10
+}
