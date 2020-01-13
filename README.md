@@ -6,6 +6,8 @@
  * Use minus('-') to decrease speed.
  * Game starts on pressing any of the Up, Down, Left or Right key.
  * 'Esc' to exit game.
+ * 'r' to retry game.
+ * Length increases by a block on score of every 100 multiple.
 ```
 
 ## Built With

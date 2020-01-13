@@ -1,10 +1,10 @@
 import tkinter as tk
+from os import system
 from PIL import ImageTk, Image
-import json
-import random
+import json, random
+import time
 
 data = json.loads(open("data.json", "r").read())
-
 
 class game(tk.Tk):
     def __init__(self):
@@ -16,7 +16,7 @@ class game(tk.Tk):
         self.headmoveX = 0
         self.headmoveY = 0
         self.firstKeyPress = False  # game will start on first key press
-        self.speed = 200
+        self.speed = data["speed"]
         self.createBoard()
         self.bind("<Any-KeyPress>", self.turn)
         self.gameLoop()
@@ -56,6 +56,7 @@ class game(tk.Tk):
         )
         self.createBody(1)
         self.createBody(2)
+        self.bodyPartsCount = 2
 
     def createBody(self, num):
         self.canvas.create_image(
@@ -138,11 +139,17 @@ class game(tk.Tk):
             self.destroy()
         elif key == "plus":
             self.speed += 100
+        elif key == "r":
+            self.retry()
         elif key == "minus":
             if self.speed > 100:
                 self.speed -= 100
         else:
             pass
+
+    def retry(self):
+        self.destroy()
+        self.__init__()
 
     def gameLoop(self):
         if self.firstKeyPress:
@@ -160,6 +167,9 @@ class game(tk.Tk):
         self.currentScore.configure(
             text="Current Score: {}".format(str(self.score).zfill(3))
         )
+        if self.score%100 == 0:
+            self.bodyPartsCount += 1
+            self.createBody(self.bodyPartsCount)
         if self.score >= self.Max_Score:
             self.Max_Score = self.score
             data["Max_Score"] = self.score
